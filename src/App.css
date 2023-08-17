@@ -1,0 +1,261 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: "Montserrat", sans-serif;
+  border: none;
+  font-size: 1rem;
+  color: var(--white-primary);
+  --white-primary: #fff;
+  --color-button: #5763b2;
+  --gray-dark: #231f1f;
+  --gray-middle: #464646;
+  --gray-light: #636363;
+}
+
+.block-center {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+  margin: 0 auto;
+}
+
+.backgound__info {
+  background-color: var(--gray-light);
+  width: 100vw;
+  height: 100vh;
+}
+
+.container {
+  background: var(--gray-dark);
+  /* border-radius: 15px; */
+  height: 100vh;
+  width: 100vw;
+  box-shadow: 0px 0px 14px 0px rgba(51, 51, 51, 1);
+  /* position: fixed; */
+  /* top: 5%; */
+  /* left: 5%; */
+  display: flex;
+}
+
+.main-content {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  overflow: auto;
+}
+
+.main-content::-webkit-scrollbar {
+  background: var(--gray-middle);
+  width: 10px;
+  box-shadow: inset 2px 2px 5px 0 rgba(#fff, 0.5);
+  border-radius: 100px;
+  cursor: pointer;
+}
+
+.main-content::-webkit-scrollbar-thumb {
+  width: 100%;
+  box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
+  background: rgba(255, 255, 255, 0.5);
+  border-radius: 100px;
+  cursor: pointer;
+}
+
+.sort {
+  width: 10vw;
+  background-color: var(--gray-middle);
+  padding: 0.5vw;
+  border-radius: 0.5vw;
+  margin-right: 0.3vw;
+}
+
+.query {
+  width: 10vw;
+  background-color: var(--gray-middle);
+  padding: 0.5vw;
+  border-radius: 0.5vw;
+  /* margin: 0.3vw 0 0 0.5vw; */
+}
+
+.query:focus {
+  outline: none;
+}
+
+.sort:focus {
+  outline: none;
+}
+
+.task-lists {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  /* justify-content: center; */
+  flex: 1;
+}
+
+.h1 {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0 auto;
+  max-width: 45vw;
+  line-height: 200%;
+  text-align: center;
+  font-size: 2vw;
+}
+
+.h1-inactive {
+  display: none;
+}
+
+.link-to {
+  display: flex;
+  align-items: center;
+  list-style: none;
+  width: 90%;
+  margin: 0 auto;
+  padding: 0.5rem;
+  border-radius: 15px;
+  outline: 2px solid var(--gray-middle);
+}
+
+.link-to > li {
+  font-size: 3rem;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.link-to:hover {
+  outline: none;
+  background-color: var(--color-button);
+}
+
+.active {
+  outline: none;
+  background-color: var(--color-button);
+}
+
+.filters {
+  display: flex;
+  margin: 0.5vw 0 0 1vw;
+}
+
+.one-post {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  flex: 1;
+  width: 100%;
+}
+
+.post-one__body {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+  max-width: 40vw;
+  text-align: center;
+  border: 3px solid var(--gray-middle);
+  padding: 2rem;
+  border-radius: 15px;
+}
+
+.kotik {
+  padding-bottom: 1rem;
+  width: 100%;
+}
+
+.hello-page {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  margin: 0 auto;
+}
+
+.hello-btn {
+  display: flex;
+}
+
+.slider {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0 auto;
+  max-width: 45vw;
+  line-height: 200%;
+  text-align: center;
+  font-size: 2vw;
+}
+
+.img-slider {
+  width: 600px;
+  position: relative;
+}
+
+.img-slider::before {
+  content: url(../public/cats.jpg);
+  display: block;
+  width: 10px;
+  height: 100px;
+  border: 11px solid red;
+  position: absolute;
+  top: 10px;
+  left: 10px;
+}
+
+.search-user {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0.3vw 0 0 2vw;
+}
+
+.search-user > input {
+  margin-right: 0.5rem;
+}
+
+.hello-page {
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.hello-page > h1 {
+  font-size: 2.5rem;
+  margin-bottom: 1rem;
+}
+
+.hello-page > a {
+  font-size: 1.5rem;
+}
+
+.pagination {
+  margin: 0 0 0 1vw;
+}
+.item {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0.5vw;
+  background: var(--color-button);
+  border-radius: 0.5vw;
+  cursor: pointer;
+  margin-right: 0.3vw;
+  width: 2vw;
+}
+
+.current {
+  width: 2vw;
+  border: 2px solid var(--gray-light);
+  padding: 0.5vw;
+  margin-right: 0.3vw;
+  background: white;
+  color: black;
+  border-radius: 0.5vw;
+}

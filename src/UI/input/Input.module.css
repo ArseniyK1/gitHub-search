@@ -1,0 +1,11 @@
+.custom-input {
+  padding: 0.5vw;
+  margin-bottom: 1vw;
+  width: 100%;
+  color: #000;
+  border-radius: 0.5vw;
+  background-color: var(--white-primary);
+}
+.custom-input:focus {
+  outline: none;
+}

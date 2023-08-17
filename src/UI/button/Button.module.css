@@ -1,0 +1,15 @@
+.btn {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+  margin-right: 0.3vw;
+  border-radius: 10px;
+  padding: 0.5vw;
+  background-color: var(--color-button);
+}
+.btn:hover {
+  opacity: 0.8;
+  color: black;
+}

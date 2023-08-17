@@ -1,0 +1,31 @@
+.bg-modal {
+  background: rgba(0, 0, 0, 0.85);
+  z-index: 2;
+  width: 100vw;
+  height: 100vh;
+  position: absolute;
+  top: 0;
+  left: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.modal {
+  position: relative;
+  width: 30vw;
+  height: 13vw;
+  margin: 0 auto;
+  z-index: 3;
+  border-radius: 1vw;
+  background: var(--gray-middle);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.close {
+  position: absolute;
+  right: 1.5%;
+  top: 3%;
+  cursor: pointer;
+}

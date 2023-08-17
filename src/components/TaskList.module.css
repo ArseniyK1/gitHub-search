@@ -1,0 +1,10 @@
+.task-list {
+  list-style: none;
+  padding: 1vw;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: stretch;
+  align-self: stretch;
+  align-content: stretch;
+  width: 100%;
+}
