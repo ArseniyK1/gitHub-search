@@ -11,7 +11,7 @@ const TaskItem = ({ user, repository }) => {
           <p>{user.login}</p>
         </h2>
         <p>Айди: {user.id}</p>
-        <p>Кол-во репов: {repository}</p>
+        <p>Репозитории: {repository}</p>
       </div>
       <Link to={`./${user.id}`}>
         <Button>Подробнее</Button>
