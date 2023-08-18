@@ -1,8 +1,7 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import TaskService from "@api/TaskService";
 import Input from "@ui/input/Input";
 import Button from "@ui/button/Button";
-import { useFetching } from "@hooks/useFetching";
 
 const ByUserIdPage = () => {
   const [inputUser, setInputUser] = useState("");
