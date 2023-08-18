@@ -15,6 +15,7 @@ const UserList = ({ users }) => {
 
       for (let i = 0; i < users.length; i++) {
         const repo = await TaskService.byUserId(users[i].id);
+        console.log(repo);
         repoCounts.push(repo.data.public_repos);
       } // пробегаемся по полученным пользователям и записываем в массив кол-ва их репозиториев
 

@@ -7,9 +7,9 @@ export default class TasksService {
       params: {
         q: username,
       },
-      // headers: {
-      //   Authorization: `Bearer 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`,
-      // },
+      headers: {
+        Authorization: `Bearer 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`,
+      },
       // токен авторизации истек
     });
 
@@ -18,12 +18,11 @@ export default class TasksService {
 
   // функция, которая запрашивает у апи гитхаба полученного пользователя по айди
   static async byUserId(id) {
-    const response = await axios.get(
-      `https://api.github.com/user/${id}`
-      // headers: {
-      //   Authorization: `Bearer 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`,
-      // },
-    );
+    const response = await axios.get(`https://api.github.com/user/${id}`, {
+      headers: {
+        Authorization: `Bearer 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`,
+      },
+    });
 
     return response;
   }
