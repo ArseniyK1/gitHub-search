@@ -48,7 +48,7 @@ const Dashboard = () => {
   // Эффект, запускающий fetchUsers при изменении параметров пагинации, сортировки или поискового запроса
   useEffect(() => {
     fetchUsers();
-  }, [pagination.page, sort, searchUser]);
+  }, [sort]);
 
   // Функция изменения текущей страницы пагинации
   const changePage = (page) => {
