@@ -1,19 +1,12 @@
-import { useState } from "react";
-
 export const useFetching = (callback) => {
-  const [isLoading, setIsLoading] = useState(false);
-  const [error, setError] = useState("");
-
+  // хук, который запускает полученную асинхронную функцию и в случае ошибки выбрасывает ошибку
   const fetching = async () => {
     try {
-      setIsLoading(true);
       await callback();
     } catch (error) {
-      setError(error.message);
-    } finally {
-      setIsLoading(false);
+      console.error(error.message);
     }
   };
 
-  return [fetching, isLoading, error];
+  return [fetching];
 };

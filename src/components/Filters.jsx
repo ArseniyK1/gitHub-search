@@ -1,12 +1,15 @@
 import Input from "@ui/input/Input";
 import Button from "@ui/button/Button";
 
+// компонент вынес в отдельный, чтобы если что его переиспользовать в другом месте на нашем сайте
 const Filters = ({
   searchUser,
   changeSearchUserHandler,
   submitFormHandler,
 }) => {
   return (
+    // получаем поисковой запрос, функцию изменения этого поискового запроса и обработчик отправки формы
+    // и передаем это в наши кастомные UI компоненты Input и Button
     <form className="search-user">
       <Input
         inputValue={searchUser}

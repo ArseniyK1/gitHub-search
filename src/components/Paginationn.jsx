@@ -5,7 +5,7 @@ const Paginationn = ({ totalPages, currentPage, changePage }) => {
     { length: totalPages },
     (_, index) => index + 1
   );
-
+  // компонент пагинации получает какое кол-во страниц нужно отобразить
   return (
     <div className="pagination">
       {pageNumbers.map((page) => (

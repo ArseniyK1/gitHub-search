@@ -259,3 +259,18 @@
   color: black;
   border-radius: 0.5vw;
 }
+
+.error {
+  height: 100vh;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  background-color: var(--gray-dark);
+  font-size: 5rem;
+}
+
+.error > p {
+  margin: 0.3vw 0 0.5vw 0;
+}

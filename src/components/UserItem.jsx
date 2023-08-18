@@ -1,8 +1,9 @@
 import { Link } from "react-router-dom";
 import Button from "../UI/button/Button";
-import styles from "./TaskItem.module.css";
+import styles from "./UserItem.module.css";
 
-const TaskItem = ({ user, repository }) => {
+const UserItem = ({ user, repository }) => {
+  // получаем пользователя, отображаем у него аватарку, логин, айди и кол-во репов
   return (
     <li className={styles["task-item"]}>
       <div className={styles["task-item__body"]}>
@@ -13,6 +14,7 @@ const TaskItem = ({ user, repository }) => {
         <p>Айди: {user.id}</p>
         <p>Репозитории: {repository}</p>
       </div>
+      {/* при нажатии на кнопку "подробнее" открывается страница с подробной информацией о пользователе */}
       <Link to={`./${user.id}`}>
         <Button>Подробнее</Button>
       </Link>
@@ -20,4 +22,4 @@ const TaskItem = ({ user, repository }) => {
   );
 };
 
-export default TaskItem;
+export default UserItem;

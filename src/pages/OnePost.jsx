@@ -4,19 +4,21 @@ import TaskService from "@api/TaskService";
 
 const OnePost = () => {
   const [user, setUser] = useState(null);
-  const { id } = useParams();
+  const { id } = useParams(); // получаем пользователя из параметра в ссылке, т.е если http://localhost:5173/dashboard/123, то 123 записывается в id
 
-  const fetchPost = async () => {
-    const response = await TaskService.byUserId(id);
-    setUser(response.data);
+  const fetchUser = async () => {
+    const response = await TaskService.byUserId(id); // получения пользователя по айди
+    setUser(response.data); // записываем данные пользователя в состояние
   };
 
+  // получения пользователя отрабатывает каждый раз как меняется айди
   useEffect(() => {
-    fetchPost();
+    fetchUser();
   }, [id]);
 
   return (
     <div className="one-post">
+      {/* отображаем айди, логин, кол-во репов и ссылку на пользователя на гитхаб */}
       {user && (
         <div className="post-one__body">
           <img src={user.avatar_url} alt="avatar" className="kotik" />

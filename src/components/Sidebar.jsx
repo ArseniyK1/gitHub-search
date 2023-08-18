@@ -1,4 +1,3 @@
-import { useState } from "react";
 import styles from "./SideBar.module.css";
 import { Link, NavLink } from "react-router-dom";
 
@@ -10,6 +9,9 @@ const SideBar = () => {
       </Link>
       <div className={styles["menu-nav"]}>
         <ul className={styles.ul}>
+          {/* NavLink нужен, чтобы избавить компонент от громоздкой логики активного нажатия на роуты
+           (если мы находимся на странице Dashboard, NavLink в App.css ищет класс active и устанавливает эти стили на кнопку).
+           Как только мы переходим на другую страницу, стили активной страницы пропадают */}
           <NavLink to={`dashboard`} className="link-to">
             <li>
               <img
@@ -33,8 +35,7 @@ const SideBar = () => {
         <p>
           Проект под названием "GitHub search engine". В данном проекте было
           реализовано: роутинг, мемоизация, пагинация, поиск, сортировка и
-          разбивка на функциональные и UI компонент. Все права защищены. Что бы
-          это ни значило. Удачи!
+          разбивка на функциональные и UI компонент.
         </p>
       </div>
     </div>

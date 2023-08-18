@@ -1,7 +1,8 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import TaskService from "@api/TaskService";
 import Input from "@ui/input/Input";
 import Button from "@ui/button/Button";
+import { useFetching } from "@hooks/useFetching";
 
 const ByUserIdPage = () => {
   const [inputUser, setInputUser] = useState("");
@@ -11,6 +12,7 @@ const ByUserIdPage = () => {
     event.preventDefault();
     const user = await TaskService.byUserId(inputUser);
     setUser(user.data);
+    console.log(user.data);
   };
 
   const changeSearchUserHandler = (event) => {
@@ -46,8 +48,10 @@ const ByUserIdPage = () => {
             </h1>
             <br />
             <span>
-              Никнейм пользователя:{" "}
-              <span style={{ textDecoration: "underline" }}>{user.login}</span>
+              Город пользователя:{" "}
+              <span style={{ textDecoration: "underline" }}>
+                {user.location}
+              </span>
             </span>
             <p>
               Количество репозиториев пользователя:{" "}
