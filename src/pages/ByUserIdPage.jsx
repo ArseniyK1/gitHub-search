@@ -1,5 +1,5 @@
 import { useState } from "react";
-import TaskService from "@api/TaskService";
+import GitApiService from "@api/GitApiService";
 import Input from "@ui/input/Input";
 import Button from "@ui/button/Button";
 
@@ -9,7 +9,7 @@ const ByUserIdPage = () => {
 
   const submitFormHandler = async (event) => {
     event.preventDefault();
-    const user = await TaskService.byUserId(inputUser);
+    const user = await GitApiService.byUserId(inputUser);
     setUser(user.data);
   };
 

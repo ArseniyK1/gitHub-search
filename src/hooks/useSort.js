@@ -1,10 +1,10 @@
-import { useMemo } from "react";
-import TaskService from "@api/TaskService";
+import GitApiService from "../API/GitApiService";
 
 export const useSort = async (array, sort) => {
+  console.log(array);
   const sortedUsers = await Promise.all(
     array.map(async (user) => {
-      const repo = await TaskService.byUserId(user.id);
+      const repo = await GitApiService.byUserId(user.id);
       return {
         user,
         repo: repo.data,

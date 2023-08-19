@@ -1,7 +1,7 @@
 import styles from "./UserList.module.css";
 import UserItem from "./UserItem";
 import { useEffect, useState } from "react";
-import TaskService from "@api/TaskService";
+import GitApiService from "@api/GitApiService";
 import { LinearProgress } from "@mui/material";
 
 const UserList = ({ users }) => {
@@ -14,7 +14,7 @@ const UserList = ({ users }) => {
       const repoCounts = []; // результат запишется сюда
 
       for (let i = 0; i < users.length; i++) {
-        const repo = await TaskService.byUserId(users[i].id);
+        const repo = await GitApiService.byUserId(users[i].id);
         // console.log(
         //   "UserList component:  ",
         //   "userId = ",

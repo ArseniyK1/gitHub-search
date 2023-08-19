@@ -4,11 +4,10 @@ import UserList from "@components/UserList";
 import Paginationn from "@components/Paginationn";
 import Filters from "@components/Filters"; // Импорт компонентов
 
-import { useEffect, useMemo, useState } from "react";
+import { useEffect, useState } from "react";
 
-import TaskService from "@api/TaskService";
+import GitApiService from "@api/GitApiService";
 import { useSort } from "@hooks/useSort";
-import { useFetching } from "@hooks/useFetching";
 import { getPage } from "@utils/getPaginationData"; // Импорт кастомных хуков и других сервисов
 
 const Dashboard = () => {
@@ -38,13 +37,14 @@ const Dashboard = () => {
         }
 
         // Fetch users based on the search query
-        const response = await TaskService.byName(searchUser);
+        const response = await GitApiService.byName(searchUser);
+
         const usersLoginArr = response.items.filter((obj) =>
           obj.login.includes(searchUser)
         );
 
         setUsers(usersLoginArr);
-        setSortedAndQueryUsers(usersLoginArr);
+        // setSortedAndQueryUsers(usersLoginArr);
 
         const totalCount = usersLoginArr.length;
         setPagination({
@@ -54,6 +54,7 @@ const Dashboard = () => {
 
         // Fetch additional data for each user and then sort
         const sortedArray = await useSort(usersLoginArr, sort);
+        setSortedAndQueryUsers(sortedArray);
 
         const startIndex = 0;
         const endIndex = startIndex + pagination.limit;

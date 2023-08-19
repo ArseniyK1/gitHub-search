@@ -1,13 +1,13 @@
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
-import TaskService from "@api/TaskService";
+import GitApiService from "@api/GitApiService";
 
 const OnePost = () => {
   const [user, setUser] = useState(null);
   const { id } = useParams(); // получаем пользователя из параметра в ссылке, т.е если http://localhost:5173/dashboard/123, то 123 записывается в id
 
   const fetchUser = async () => {
-    const response = await TaskService.byUserId(id); // получения пользователя по айди
+    const response = await GitApiService.byUserId(id); // получения пользователя по айди
     setUser(response.data); // записываем данные пользователя в состояние
   };
 

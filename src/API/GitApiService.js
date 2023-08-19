@@ -1,6 +1,6 @@
 import axios from "axios";
 
-export default class TasksService {
+export default class GitApiService {
   // функция, которая запрашивает у апи гитхаба полученного пользователя
   static async byName(username) {
     try {
@@ -14,11 +14,11 @@ export default class TasksService {
       });
       return response.data;
     } catch (error) {
-      if (error.response.status === 403) {
-        alert(
-          "Слишком много запросов, попробуйте позже или перезагрузите страницу."
-        );
-      }
+      // if (error.message.includes("403")) {
+      //   alert(
+      //     "Слишком много запросов, попробуйте позже или перезагрузите страницу."
+      //   );
+      // }
       console.error(error);
     }
   }
