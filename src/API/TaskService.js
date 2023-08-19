@@ -34,7 +34,13 @@ export default class TasksService {
       });
       return response;
     } catch (error) {
-      console.error("error byUserId = ", error);
+      if (error.response.status === 403) {
+        alert(
+          "Слишком много запросов, не удалось загрузить количество репозиториев, попробуйте позже."
+        );
+        return;
+      }
+      console.error(error);
     }
   }
 }
