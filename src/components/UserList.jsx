@@ -6,7 +6,7 @@ import { LinearProgress } from "@mui/material";
 
 const UserList = ({ users }) => {
   const [repository, setRepository] = useState([]); // состояние кол-ва репозиториев
-  const [isLoading, setIsLoading] = useState(true); // состояние загрузки
+  // const [isLoading, setIsLoading] = useState(true); // состояние загрузки
 
   // функция получение кол-ва репозиториев
   const fetchRepositoryCount = async () => {
@@ -26,10 +26,10 @@ const UserList = ({ users }) => {
       }
 
       setRepository(repoCounts); // обновляем состояние
-      setIsLoading(false); // Устанавливаем isLoading в false после загрузки данных
+      // setIsLoading(false); // Устанавливаем isLoading в false после загрузки данных
     } catch (error) {
       console.error("Error fetching repositories:", error.message);
-      setIsLoading(false); // В случае ошибки также устанавливаем isLoading в false
+      // setIsLoading(false); // В случае ошибки также устанавливаем isLoading в false
     }
   };
 
@@ -38,15 +38,15 @@ const UserList = ({ users }) => {
     fetchRepositoryCount();
   }, [users]);
 
-  if (isLoading) {
-    // если загрузка, то ее отображаем
-    return (
-      <LinearProgress
-        color="secondary"
-        style={{ margin: "2rem auto", width: "97%" }}
-      />
-    ); // Добавляем отображение загрузки
-  }
+  // if (isLoading) {
+  //   // если загрузка, то ее отображаем
+  //   return (
+  //     <LinearProgress
+  //       color="secondary"
+  //       style={{ margin: "2rem auto", width: "97%" }}
+  //     />
+  //   ); // Добавляем отображение загрузки
+  // }
 
   return (
     <ul className={styles["task-list"]}>

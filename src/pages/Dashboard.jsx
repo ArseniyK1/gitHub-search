@@ -1,50 +1,46 @@
-import "../App.css"; // Импорт стилей
-
+import React, { useState, useEffect } from "react";
+import "../App.css";
 import UserList from "@components/UserList";
 import Paginationn from "@components/Paginationn";
-import Filters from "@components/Filters"; // Импорт компонентов
-
-import { useEffect, useState } from "react";
-
-import GitApiService from "@api/GitApiService";
+import Filters from "@components/Filters";
 import { useSort } from "@hooks/useSort";
-import { getPage } from "@utils/getPaginationData"; // Импорт кастомных хуков и других сервисов
+import { getPage } from "@utils/getPaginationData";
+import GitApiService from "@api/GitApiService";
+import { CircularProgress, LinearProgress } from "@mui/material";
 
 const Dashboard = () => {
-  const [users, setUsers] = useState([]); // Состояние для хранения пользователей
-  const [sortedAndQueryUsers, setSortedAndQueryUsers] = useState([]); // Состояние для отсортированных и отфильтрованных пользователей
-  const [sort, setSort] = useState(""); // Состояние для выбранного типа сортировки
-  const [searchUser, setSearchUser] = useState(""); // Состояние для поискового запроса пользователя
-  const [visibleMainContent, setVisibleMainContent] = useState(false); // Состояние видимости основного контента
+  const [users, setUsers] = useState([]);
+  const [sortedAndQueryUsers, setSortedAndQueryUsers] = useState([]);
+  const [sort, setSort] = useState("");
+  const [searchUser, setSearchUser] = useState("");
+  const [visibleMainContent, setVisibleMainContent] = useState(false);
   const [pagination, setPagination] = useState({
     limit: 5,
     page: 1,
     totalPages: 0,
-  }); // Состояние для параметров пагинации
-  const [paginatedUsers, setPaginatedUsers] = useState([]); // Состояние для отображаемых на странице пользователей
+  });
+  const [paginatedUsers, setPaginatedUsers] = useState([]);
+  const [loading, setLoading] = useState(false); // Состояние для отображения состояния загрузки
 
-  // Использование кастомного хука для выполнения запроса к API
-
-  // Эффект, запускающий fetchUsers при изменении параметров пагинации, сортировки или поискового запроса
   useEffect(() => {
-    const delay = 2000; // Adjust the delay as needed (in milliseconds)
+    const delay = 2000;
     let timeoutId;
 
     const fetchAndSortUsers = async () => {
       try {
+        setLoading(true);
+
         if (!searchUser) {
+          setLoading(false);
           return;
         }
 
-        // Fetch users based on the search query
         const response = await GitApiService.byName(searchUser);
-
         const usersLoginArr = response.items.filter((obj) =>
           obj.login.includes(searchUser)
         );
 
         setUsers(usersLoginArr);
-        // setSortedAndQueryUsers(usersLoginArr);
 
         const totalCount = usersLoginArr.length;
         setPagination({
@@ -52,15 +48,17 @@ const Dashboard = () => {
           totalPages: getPage(totalCount, pagination.limit),
         });
 
-        // Fetch additional data for each user and then sort
         const sortedArray = await useSort(usersLoginArr, sort);
         setSortedAndQueryUsers(sortedArray);
 
         const startIndex = 0;
         const endIndex = startIndex + pagination.limit;
         setPaginatedUsers(sortedArray.slice(startIndex, endIndex));
+
+        setLoading(false);
       } catch (error) {
         console.error(error);
+        setLoading(false);
       }
     };
 
@@ -72,7 +70,6 @@ const Dashboard = () => {
     };
   }, [searchUser, sort]);
 
-  // Функция изменения текущей страницы пагинации
   const changePage = (page) => {
     const startIndex = (page - 1) * pagination.limit;
     const endIndex = startIndex + pagination.limit;
@@ -80,16 +77,12 @@ const Dashboard = () => {
     setPagination({ ...pagination, page: page });
   };
 
-  // Обработчик отправки формы поиска
   const submitFormHandler = (event) => {
-    event.preventDefault(); // убираем стандартное поведение браузера (обновление данных происходит без обновления страницы)
-
-    setVisibleMainContent(true); // отображаем основной контент
+    event.preventDefault();
+    setVisibleMainContent(true);
   };
 
-  // Обработчик изменения типа сортировки
   const setSortHandler = (event) => {
-    // в зависимости какой тиа сортировки выбран, его записываем в состояние
     if (event.target.value === "По возрастанию") {
       setSort("По возрастанию");
     }
@@ -101,7 +94,6 @@ const Dashboard = () => {
     }
   };
 
-  // Обработчик изменения поискового запроса пользователя
   const changeSearchUserHandler = (event) => {
     setSearchUser(event.target.value);
   };
@@ -109,17 +101,14 @@ const Dashboard = () => {
   return (
     <>
       <div className="main-content">
-        {/* Компонент Filters для поиска */}
         <Filters
           searchUser={searchUser}
           changeSearchUserHandler={changeSearchUserHandler}
           submitFormHandler={submitFormHandler}
         />
-        {/* Отображение основного контента при видимости */}
         {visibleMainContent && (
           <>
             <div className="filters">
-              {/* Выбор типа сортировки */}
               <select className="sort" onChange={setSortHandler}>
                 <option value="Без сортировки">Без сортировки</option>
                 <option value="По возрастанию">По возрастанию</option>
@@ -127,14 +116,25 @@ const Dashboard = () => {
               </select>
             </div>
             <div className="task-lists">
-              {/* Компонент UserList для отображения списка пользователей */}
               <UserList users={paginatedUsers} />
-              {/* Компонент Paginationn для пагинации */}
               <Paginationn
                 totalPages={pagination.totalPages}
                 currentPage={pagination.page}
                 changePage={changePage}
               />
+              {loading && (
+                // <LinearProgress style={{ width: "95%", margin: "0 auto" }} />
+                <div
+                  style={{
+                    margin: "0 auto",
+                    position: "absolute",
+                    top: "10px",
+                    left: "16vw",
+                  }}
+                >
+                  Идет загрузка...
+                </div>
+              )}
             </div>
           </>
         )}
