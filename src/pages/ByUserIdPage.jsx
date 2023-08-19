@@ -11,7 +11,6 @@ const ByUserIdPage = () => {
     event.preventDefault();
     const user = await TaskService.byUserId(inputUser);
     setUser(user.data);
-    console.log(user.data);
   };
 
   const changeSearchUserHandler = (event) => {

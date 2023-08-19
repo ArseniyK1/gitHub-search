@@ -15,14 +15,14 @@ const UserList = ({ users }) => {
 
       for (let i = 0; i < users.length; i++) {
         const repo = await TaskService.byUserId(users[i].id);
-        console.log(repo);
+        console.log("repo = ", repo.data.public_repos);
         repoCounts.push(repo.data.public_repos);
-      } // пробегаемся по полученным пользователям и записываем в массив кол-ва их репозиториев
+      }
 
       setRepository(repoCounts); // обновляем состояние
       setIsLoading(false); // Устанавливаем isLoading в false после загрузки данных
     } catch (error) {
-      console.error("Error fetching repositories:", error);
+      console.error("Error fetching repositories:", error.message);
       setIsLoading(false); // В случае ошибки также устанавливаем isLoading в false
     }
   };

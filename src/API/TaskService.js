@@ -3,27 +3,38 @@ import axios from "axios";
 export default class TasksService {
   // функция, которая запрашивает у апи гитхаба полученного пользователя
   static async byName(username) {
-    const response = await axios.get("https://api.github.com/search/users", {
-      params: {
-        q: username,
-      },
-      headers: {
-        Authorization: `Bearer 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`,
-      },
-      // токен авторизации истек
-    });
-
-    return response.data;
+    try {
+      const response = await axios.get("https://api.github.com/search/users", {
+        params: {
+          q: username,
+        },
+        headers: {
+          Authorization: `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`,
+        },
+      });
+      return response.data;
+    } catch (error) {
+      if (error.response.status === 403) {
+        alert(
+          "Слишком много запросов, попробуйте позже или перезагрузите страницу."
+        );
+      }
+      console.error(error);
+    }
   }
 
   // функция, которая запрашивает у апи гитхаба полученного пользователя по айди
   static async byUserId(id) {
-    const response = await axios.get(`https://api.github.com/user/${id}`, {
-      headers: {
-        Authorization: `Bearer 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`,
-      },
-    });
-
-    return response;
+    try {
+      const response = await axios.get(`https://api.github.com/user/${id}`, {
+        headers: {
+          Authorization:
+            "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",
+        },
+      });
+      return response;
+    } catch (error) {
+      console.error("error byUserId = ", error);
+    }
   }
 }

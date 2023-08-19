@@ -31,6 +31,11 @@ const Dashboard = () => {
     if (!searchUser) {
       return; // если пользователь не ввел поисковой запрос, то выходим из функции
     }
+    const cyrillicPattern = /^\p{Script=Cyrillic}+$/u;
+    if (cyrillicPattern.test(searchUser)) {
+      alert("Чтобы найти пользователя введите его логин на английском!");
+      return;
+    }
     const response = await TaskService.byName(searchUser); // запрашиваем введенного пользователя
     const usersLoginArr = response.items.filter((obj) =>
       obj.login.includes(searchUser)
@@ -48,6 +53,7 @@ const Dashboard = () => {
   // Эффект, запускающий fetchUsers при изменении параметров пагинации, сортировки или поискового запроса
   useEffect(() => {
     fetchUsers();
+    console.log(paginatedUsers);
   }, [sort]);
 
   // Функция изменения текущей страницы пагинации
