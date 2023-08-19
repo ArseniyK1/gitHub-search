@@ -1,7 +1,8 @@
 {
-  "name": "posts-train",
+  "name": "GitHub search engine",
   "private": true,
-  "version": "0.0.0",
+  "author": "Anna Shamanova",
+  "version": "1.0.0",
   "type": "module",
   "scripts": {
     "dev": "vite",
