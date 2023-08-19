@@ -34,3 +34,13 @@ export const useSort = (array, sort) => {
 
   return sortedUsers; // возвращаем отсортированный массив
 };
+
+export const useUsers = (usersArr, sort) => {
+  const sortedUsers = useSort(usersArr, sort);
+
+  const sortedAndSearchedUsers = useMemo(() => {
+    return sortedUsers;
+  }, [sortedUsers]);
+
+  return sortedAndSearchedUsers;
+};

@@ -7,7 +7,7 @@ import Filters from "@components/Filters"; // Импорт компоненто�
 import { useEffect, useMemo, useState } from "react";
 
 import TaskService from "@api/TaskService";
-import { useSort } from "@hooks/useSort";
+import { useSort, useUsers } from "@hooks/useSort";
 import { useFetching } from "@hooks/useFetching";
 import { getPage } from "@utils/getPaginationData"; // Импорт кастомных хуков и других сервисов
 
@@ -53,7 +53,6 @@ const Dashboard = () => {
   // Эффект, запускающий fetchUsers при изменении параметров пагинации, сортировки или поискового запроса
   useEffect(() => {
     fetchUsers();
-    console.log(paginatedUsers);
   }, [sort]);
 
   // Функция изменения текущей страницы пагинации
@@ -76,8 +75,8 @@ const Dashboard = () => {
   // Обработчик отправки формы поиска
   const submitFormHandler = (event) => {
     event.preventDefault(); // убираем стандартное поведение браузера (обновление данных происходит без обновления страницы)
-    setVisibleMainContent(true); // отображаем основной контент
     fetchUsers(); // Вызов fetchUsers для выполнения запроса
+    setVisibleMainContent(true); // отображаем основной контент
   };
 
   // Обработчик изменения типа сортировки

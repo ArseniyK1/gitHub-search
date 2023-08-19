@@ -15,7 +15,13 @@ const UserList = ({ users }) => {
 
       for (let i = 0; i < users.length; i++) {
         const repo = await TaskService.byUserId(users[i].id);
-        console.log("repo = ", repo.data.public_repos);
+        // console.log(
+        //   "UserList component:  ",
+        //   "userId = ",
+        //   repo.data.id,
+        //   " repos count: ",
+        //   repo.data.public_repos
+        // );
         repoCounts.push(repo.data.public_repos);
       }
 
