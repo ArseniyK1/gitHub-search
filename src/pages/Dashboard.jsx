@@ -24,36 +24,52 @@ const Dashboard = () => {
   }); // Состояние для параметров пагинации
   const [paginatedUsers, setPaginatedUsers] = useState([]); // Состояние для отображаемых на странице пользователей
 
-  const sortedArray = useSort(users, sort); // Использование кастомного хука для сортировки пользователей
-
   // Использование кастомного хука для выполнения запроса к API
-  const [fetchUsers] = useFetching(async () => {
-    if (!searchUser) {
-      return; // если пользователь не ввел поисковой запрос, то выходим из функции
-    }
-    const cyrillicPattern = /^\p{Script=Cyrillic}+$/u;
-    if (cyrillicPattern.test(searchUser)) {
-      alert("Чтобы найти пользователя введите его логин на английском!");
-      return;
-    }
-    const response = await TaskService.byName(searchUser); // запрашиваем введенного пользователя
-    const usersLoginArr = response.items.filter((obj) =>
-      obj.login.includes(searchUser)
-    ); // снова сортируем полученный JSON, чтобы поиск был только по логину
-    setUsers(usersLoginArr); // записываем отсортированных пользователей в состояние
-    setSortedAndQueryUsers(usersLoginArr); //  записываем отсортированных пользователей в состояние, для дальнейшей сортировки по возр. и убыв.
-    const totalCount = usersLoginArr.length; // вычисляем суммарное количество пользователей
-    setPagination({
-      ...pagination,
-      totalPages: getPage(totalCount, pagination.limit),
-    }); // передаем в состояние пагинации максимальное кол-во страниц, вычисленное с помощью нашей функции getPage
-    logSortedArray(); // вызов функции для логирования отсортированного массива
-  });
 
   // Эффект, запускающий fetchUsers при изменении параметров пагинации, сортировки или поискового запроса
   useEffect(() => {
-    fetchUsers();
-  }, [sort]);
+    const delay = 2000; // Adjust the delay as needed (in milliseconds)
+    let timeoutId;
+
+    const fetchAndSortUsers = async () => {
+      try {
+        if (!searchUser) {
+          return;
+        }
+
+        // Fetch users based on the search query
+        const response = await TaskService.byName(searchUser);
+        const usersLoginArr = response.items.filter((obj) =>
+          obj.login.includes(searchUser)
+        );
+
+        setUsers(usersLoginArr);
+        setSortedAndQueryUsers(usersLoginArr);
+
+        const totalCount = usersLoginArr.length;
+        setPagination({
+          ...pagination,
+          totalPages: getPage(totalCount, pagination.limit),
+        });
+
+        // Fetch additional data for each user and then sort
+        const sortedArray = await useSort(usersLoginArr, sort);
+
+        const startIndex = 0;
+        const endIndex = startIndex + pagination.limit;
+        setPaginatedUsers(sortedArray.slice(startIndex, endIndex));
+      } catch (error) {
+        console.error(error);
+      }
+    };
+
+    clearTimeout(timeoutId);
+    timeoutId = setTimeout(fetchAndSortUsers, delay);
+
+    return () => {
+      clearTimeout(timeoutId);
+    };
+  }, [searchUser, sort]);
 
   // Функция изменения текущей страницы пагинации
   const changePage = (page) => {
@@ -63,19 +79,10 @@ const Dashboard = () => {
     setPagination({ ...pagination, page: page });
   };
 
-  // Функция для логирования отсортированного массива
-  const logSortedArray = async () => {
-    const sorted = await sortedArray; // получаем отсортированный массив
-    setSortedAndQueryUsers(sorted); // записываем его в состояние
-    const startIndex = 0;
-    const endIndex = startIndex + pagination.limit;
-    setPaginatedUsers(sorted.slice(startIndex, endIndex)); // обновляем пагинацию
-  };
-
   // Обработчик отправки формы поиска
   const submitFormHandler = (event) => {
     event.preventDefault(); // убираем стандартное поведение браузера (обновление данных происходит без обновления страницы)
-    fetchUsers(); // Вызов fetchUsers для выполнения запроса
+
     setVisibleMainContent(true); // отображаем основной контент
   };
 
@@ -119,7 +126,7 @@ const Dashboard = () => {
               </select>
             </div>
             <div className="task-lists">
-              {/* Компонент TaskList для отображения списка пользователей */}
+              {/* Компонент UserList для отображения списка пользователей */}
               <UserList users={paginatedUsers} />
               {/* Компонент Paginationn для пагинации */}
               <Paginationn
