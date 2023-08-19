@@ -7,7 +7,7 @@ import Filters from "@components/Filters"; // Импорт компоненто�
 import { useEffect, useMemo, useState } from "react";
 
 import TaskService from "@api/TaskService";
-import { useSort, useUsers } from "@hooks/useSort";
+import { useSort } from "@hooks/useSort";
 import { useFetching } from "@hooks/useFetching";
 import { getPage } from "@utils/getPaginationData"; // Импорт кастомных хуков и других сервисов
 
