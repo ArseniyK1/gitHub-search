@@ -28,6 +28,12 @@ const Dashboard = () => {
 
     const fetchAndSortUsers = async () => {
       try {
+        const cyrillicPattern = /^\p{Script=Cyrillic}+$/u;
+        if (cyrillicPattern.test(searchUser)) {
+          alert("Пожалуйста, введите запрос на английском!");
+          setLoading(false);
+          return;
+        }
         setLoading(true);
 
         if (!searchUser) {
@@ -57,7 +63,6 @@ const Dashboard = () => {
 
         setLoading(false);
       } catch (error) {
-        console.error(error);
         setLoading(false);
       }
     };

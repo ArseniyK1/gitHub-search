@@ -14,12 +14,16 @@ export default class GitApiService {
       });
       return response.data;
     } catch (error) {
-      // if (error.message.includes("403")) {
-      //   alert(
-      //     "Слишком много запросов, попробуйте позже или перезагрузите страницу."
-      //   );
-      // }
-      console.error(error);
+      if (error.response && error.response.status === 403) {
+        if (!GitApiService.isAlertShown) {
+          alert(
+            "Слишком много запросов, обновите страницу или попробуйте позже!"
+          );
+          GitApiService.isAlertShown = true; // Set the flag to true after showing the alert
+        }
+        return;
+      }
+      return;
     }
   }
 
@@ -34,7 +38,19 @@ export default class GitApiService {
       });
       return response;
     } catch (error) {
-      console.error(error);
+      if (error.response && error.response.status === 403) {
+        if (!GitApiService.isAlertShown) {
+          alert(
+            "Слишком много запросов, обновите страницу или попробуйте позже!"
+          );
+          GitApiService.isAlertShown = true;
+        }
+        return;
+      }
+
+      return;
     }
   }
 }
+
+GitApiService.isAlertShown = false;

@@ -28,7 +28,7 @@ const UserList = ({ users }) => {
       setRepository(repoCounts); // обновляем состояние
       // setIsLoading(false); // Устанавливаем isLoading в false после загрузки данных
     } catch (error) {
-      console.error("Error fetching repositories:", error.message);
+      // console.error("Error fetching repositories:", error.message);
       // setIsLoading(false); // В случае ошибки также устанавливаем isLoading в false
     }
   };

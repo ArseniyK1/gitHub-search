@@ -1,7 +1,6 @@
 import GitApiService from "../API/GitApiService";
 
 export const useSort = async (array, sort) => {
-  console.log(array);
   const sortedUsers = await Promise.all(
     array.map(async (user) => {
       const repo = await GitApiService.byUserId(user.id);
