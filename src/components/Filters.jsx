@@ -1,5 +1,6 @@
 import Input from "@ui/input/Input";
 import Button from "@ui/button/Button";
+import PropTypes from "prop-types";
 
 // компонент вынес в отдельный, чтобы если что его переиспользовать в другом месте на нашем сайте
 const Filters = ({
@@ -31,3 +32,9 @@ const Filters = ({
 };
 
 export default Filters;
+
+Filters.propTypes = {
+  searchUser: PropTypes.string,
+  changeSearchUserHandler: PropTypes.func,
+  submitFormHandler: PropTypes.func,
+};

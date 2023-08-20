@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import { useState, useEffect } from "react";
 import "../App.css";
 import UserList from "@components/UserList";
 import Paginationn from "@components/Paginationn";
@@ -6,10 +6,9 @@ import Filters from "@components/Filters";
 import { useSort } from "@hooks/useSort";
 import { getPage } from "@utils/getPaginationData";
 import GitApiService from "@api/GitApiService";
-import { CircularProgress, LinearProgress } from "@mui/material";
+import { CircularProgress } from "@mui/material";
 
-const Dashboard = () => {
-  const [users, setUsers] = useState([]);
+export default function Dashboard() {
   const [sortedAndQueryUsers, setSortedAndQueryUsers] = useState([]);
   const [sort, setSort] = useState("");
   const [searchUser, setSearchUser] = useState("");
@@ -46,15 +45,13 @@ const Dashboard = () => {
           obj.login.includes(searchUser)
         );
 
-        setUsers(usersLoginArr);
-
         const totalCount = usersLoginArr.length;
         setPagination({
           ...pagination,
           totalPages: getPage(totalCount, pagination.limit),
         });
 
-        const sortedArray = await useSort(usersLoginArr, sort);
+        const sortedArray = await useSort(usersLoginArr, sort); // eslint-disable-line react-hooks/rules-of-hooks
         setSortedAndQueryUsers(sortedArray);
 
         const startIndex = 0;
@@ -73,7 +70,7 @@ const Dashboard = () => {
     return () => {
       clearTimeout(timeoutId);
     };
-  }, [searchUser, sort]);
+  }, [searchUser, sort]); // eslint-disable-line react-hooks/exhaustive-deps
 
   const changePage = (page) => {
     const startIndex = (page - 1) * pagination.limit;
@@ -97,6 +94,7 @@ const Dashboard = () => {
     if (event.target.value === "Без сортировки") {
       setSort("Без сортировки");
     }
+    setPagination({ ...pagination, page: 1 });
   };
 
   const changeSearchUserHandler = (event) => {
@@ -153,6 +151,4 @@ const Dashboard = () => {
       </div>
     </>
   );
-};
-
-export default Dashboard;
+}

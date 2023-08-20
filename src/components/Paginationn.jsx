@@ -1,4 +1,4 @@
-import React from "react";
+import PropTypes from "prop-types";
 
 const Paginationn = ({ totalPages, currentPage, changePage }) => {
   const pageNumbers = Array.from(
@@ -22,3 +22,9 @@ const Paginationn = ({ totalPages, currentPage, changePage }) => {
 };
 
 export default Paginationn;
+
+Paginationn.propTypes = {
+  totalPages: PropTypes.number,
+  currentPage: PropTypes.number,
+  changePage: PropTypes.func,
+};

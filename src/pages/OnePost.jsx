@@ -6,13 +6,12 @@ const OnePost = () => {
   const [user, setUser] = useState(null);
   const { id } = useParams(); // получаем пользователя из параметра в ссылке, т.е если http://localhost:5173/dashboard/123, то 123 записывается в id
 
-  const fetchUser = async () => {
-    const response = await GitApiService.byUserId(id); // получения пользователя по айди
-    setUser(response.data); // записываем данные пользователя в состояние
-  };
-
   // получения пользователя отрабатывает каждый раз как меняется айди
   useEffect(() => {
+    async function fetchUser() {
+      const response = await GitApiService.byUserId(id); // получения пользователя по айди
+      setUser(response.data); // записываем данные пользователя в состояние
+    }
     fetchUser();
   }, [id]);
 
@@ -42,7 +41,7 @@ const OnePost = () => {
             <a
               href={user.html_url}
               style={{ textDecoration: "underline", cursor: "pointer" }}
-              target="_blank"
+              rel="noreferrer"
             >
               {user.html_url}
             </a>

@@ -4,7 +4,7 @@ import Button from "@ui/button/Button";
 const HelloPage = () => {
   return (
     <div className="hello-page">
-      <h1>Проект "GitHub search engine"</h1>
+      <h1>Проект &quot;GitHub search engine&quot;</h1>
       <div className="hello-btn">
         <Link to={"/dashboard"}>
           {" "}

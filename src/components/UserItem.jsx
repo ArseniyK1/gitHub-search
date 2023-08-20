@@ -1,6 +1,7 @@
 import { Link } from "react-router-dom";
 import Button from "../UI/button/Button";
 import styles from "./UserItem.module.css";
+import PropTypes from "prop-types";
 
 const UserItem = ({ user, repository }) => {
   // получаем пользователя, отображаем у него аватарку, логин, айди и кол-во репов
@@ -23,3 +24,8 @@ const UserItem = ({ user, repository }) => {
 };
 
 export default UserItem;
+
+UserItem.propTypes = {
+  user: PropTypes.object,
+  repository: PropTypes.number,
+};

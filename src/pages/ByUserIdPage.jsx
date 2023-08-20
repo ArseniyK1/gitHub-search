@@ -62,7 +62,7 @@ const ByUserIdPage = () => {
               <a
                 href={user.html_url}
                 style={{ textDecoration: "underline", cursor: "pointer" }}
-                target="_blank"
+                rel="noreferrer"
               >
                 {user.html_url}
               </a>
