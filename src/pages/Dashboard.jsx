@@ -128,17 +128,24 @@ const Dashboard = () => {
                 changePage={changePage}
               />
               {loading && (
-                // <LinearProgress style={{ width: "95%", margin: "0 auto" }} />
-                <div
+                <CircularProgress
                   style={{
                     margin: "0 auto",
                     position: "absolute",
                     top: "10px",
                     left: "16vw",
                   }}
-                >
-                  Идет загрузка...
-                </div>
+                />
+                // <div
+                //   style={{
+                //     margin: "0 auto",
+                //     position: "absolute",
+                //     top: "10px",
+                //     left: "16vw",
+                //   }}
+                // >
+                //   Идет загрузка...
+                // </div>
               )}
             </div>
           </>
