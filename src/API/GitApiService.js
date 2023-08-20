@@ -48,6 +48,13 @@ export default class GitApiService {
         return;
       }
 
+      if (error.response && error.response.status === 404) {
+        if (!GitApiService.isAlertShown) {
+          return "404";
+        }
+        return;
+      }
+
       return;
     }
   }
